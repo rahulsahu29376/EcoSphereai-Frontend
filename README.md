@@ -10,8 +10,8 @@ Built with **React 19**, **Vite**, **Tailwind CSS**, **Recharts**, and **Framer 
 
 - **Live Frontend**: [https://eco-sphereai-frontend.vercel.app](https://eco-sphereai-frontend.vercel.app)
 - **Direct Login**: [https://eco-sphereai-frontend.vercel.app/login](https://eco-sphereai-frontend.vercel.app/login)
-- **Connected Backend API**: [https://ecosphereai-backend-2.onrender.com/api](https://ecosphereai-backend-2.onrender.com/api)
-- **Backend Health Check**: [https://ecosphereai-backend-2.onrender.com/api/health](https://ecosphereai-backend-2.onrender.com/api/health)
+- **Connected Backend API**: [https://ecosphereai-backend-3.onrender.com/api](https://ecosphereai-backend-3.onrender.com/api)
+- **Backend Health Check**: [https://ecosphereai-backend-3.onrender.com/api/health](https://ecosphereai-backend-3.onrender.com/api/health)
 
 ---
 
@@ -44,7 +44,7 @@ cp .env.example .env
 ```
 Default configuration points to your deployed Render backend:
 ```env
-VITE_API_URL=https://ecosphereai-backend-2.onrender.com/api
+VITE_API_URL=https://ecosphereai-backend-3.onrender.com/api
 ```
 
 ### 3. Run Development Server
@@ -68,7 +68,7 @@ The optimized production bundle will be generated in `dist/`.
 - **Build Command**: `npm run build`
 - **Output Directory**: `dist`
 - **Environment Variables**:
-  - `VITE_API_URL`: `https://ecosphereai-backend-2.onrender.com/api`
+  - `VITE_API_URL`: `https://ecosphereai-backend-3.onrender.com/api`
   - `VITE_SUPABASE_URL`: `https://ebqetmupbnaxmhpyjkjt.supabase.co`
   - `VITE_SUPABASE_ANON_KEY`: `sb_publishable_PpsKYcOirYy68ioEwzv0pw_Stf4Wokx`
 - **SPA Routing**: Handled via `vercel.json` rewrites to `/index.html`.
