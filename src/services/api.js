@@ -1,6 +1,14 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://ecosphereai-backend-3.onrender.com/api';
+// Resolve API URL: if running in browser on a production domain (e.g. vercel.app), NEVER call localhost
+const getApiBaseUrl = () => {
+  if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    return 'https://ecosphereai-backend-3.onrender.com/api';
+  }
+  return import.meta.env.VITE_API_URL || 'https://ecosphereai-backend-3.onrender.com/api';
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -10,9 +18,19 @@ const api = axios.create({
   timeout: 15000,
 });
 
-// Request interceptor to attach JWT token
+// Request interceptor to attach JWT token and runtime safeguard against localhost
 api.interceptors.request.use(
   (config) => {
+    // Runtime safeguard: if on a remote domain (Vercel, custom domain), prevent localhost calls
+    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+      if (!config.baseURL || config.baseURL.includes('localhost')) {
+        config.baseURL = 'https://ecosphereai-backend-3.onrender.com/api';
+      }
+      if (config.url && config.url.startsWith('http://localhost')) {
+        config.url = config.url.replace(/^http:\/\/localhost:\d+\/api/, 'https://ecosphereai-backend-3.onrender.com/api');
+      }
+    }
+
     const token = localStorage.getItem('eco_token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
